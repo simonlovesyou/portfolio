@@ -41,6 +41,16 @@ module.exports = function(grunt) {
         dest: 'public/css/blog.css',
       },
     },
+    cssmin: {
+      main: {
+        src: 'public/css/main.css',
+        dest: 'public/css/main.min.css'
+      },
+      blog: {
+        src: 'public/css/blog.css',
+        dest: 'public/css/blog.min.css'
+      }
+    }
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -51,5 +61,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   //grunt.registerTask('default', [ 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js' ]);
-
 };
+
+/*
+# Only concat CSS files
+grunt concat:css 
+
+# Concat CSS and JS files, but don't do anything else
+grunt concat
+*/
