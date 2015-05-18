@@ -1,0 +1,24 @@
+{
+  "name": "Portfolio",
+  "version": "1.0.0",
+  "description": "Project for my portfolio",
+  "main": "output/js/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "portfolio",
+    "simonjohansson",
+    "simon",
+    "johansson"
+  ],
+  "author": "Simon Johansson",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jade": "^0.14.1"
+  }
+}

@@ -1,0 +1,12 @@
+[
+	{
+		"header": "Simon Johansson",
+		"date": "2015/07/02",
+		"article": 
+			[
+				"Paragraph 1", 
+				"Paragraph 2", 
+				"Paragraph 3"
+			]
+	}
+]
