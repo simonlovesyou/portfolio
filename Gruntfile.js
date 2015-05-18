@@ -28,14 +28,18 @@ module.exports = function(grunt) {
         }
       }
     },
-    concat_css: {
+    concat: {
       options: {
-        // Task-specific options go here. 
+        separator: ';',
       },
-      files: {
-        'public/css/main.css': ['dev/css/main/*.css', 'dev/css/bootstrap.css'],
-        'public/css/blog.css': ['dev/css/blog/*.css', 'dev/css/bootstrap.css']
-      }
+      basic: {
+        src: ['dev/css/bootstrap.css', 'dev/css/main/*.css'],
+        dest: 'public/css/main.css',
+      },
+      extras: {
+        src: ['dev/css/bootstrap.css', 'dev/css/blog/*.css'],
+        dest: 'public/css/blog.css',
+      },
     },
   });
 
@@ -46,6 +50,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.registerTask('default', [ 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js' ]);
+  //grunt.registerTask('default', [ 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js' ]);
 
 };
