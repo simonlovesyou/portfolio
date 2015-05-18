@@ -11,8 +11,8 @@ module.exports = function(grunt) {
           pretty: true
         },
         files: {
-          "debug/layout.html": "layout.jade",
-          "debug/blog.html": "blog.jade"
+          "debug/layout.html": "dev/jade/layout.jade",
+          "debug/blog.html": "dev/jade/blog.jade"
         }
       },
       release: {
@@ -23,14 +23,29 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
-          "public/layout.html": "layout.jade",
-          "public/blog.html": "blog.jade"
+          "public/layout.html": "dev/jade/layout.jade",
+          "public/blog.html": "dev/jade/blog.jade"
         }
       }
-    }
+    },
+    concat_css: {
+      options: {
+        // Task-specific options go here. 
+      },
+      files: {
+        'public/css/main.css': ['dev/css/main/*.css', 'dev/css/bootstrap.css'],
+        'public/css/blog.css': ['dev/css/blog/*.css', 'dev/css/bootstrap.css']
+      }
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-concat-css');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.registerTask('default', [ 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js' ]);
 
 };
