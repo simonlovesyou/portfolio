@@ -41,8 +41,8 @@ module.exports = function(grunt) {
         dest: 'public/assets/css/blog.css',
       },
       js: {
-        src: ['dev/js/*.js', 'dev/js/vendor/*.js'],
-        dest: 'public/js/index.js'
+        src: ['dev/js/*.js', 'dev/js/vendor/jquery-throttle-debounce-plugin-1.1.min.js'],
+        dest: 'public/assets/js/index.js'
       }
     },
     cssmin: {
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     uglify: {
       js: {
         options: {
-          preserveComments: false
+          preserveComments: true
         },
         files: {
           'public/assets/js/index.min.js': 'public/assets/js/index.js'
