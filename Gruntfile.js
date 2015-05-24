@@ -39,6 +39,10 @@ module.exports = function(grunt) {
       extras: {
         src: ['dev/css/bootstrap.css', 'dev/css/blog/*.css'],
         dest: 'public/css/blog.css',
+      },
+      js: {
+        src: 'dev/js/*.js',
+        dest: 'public/js/index.js'
       }
     },
     cssmin: {
@@ -60,7 +64,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   //grunt.task.requires()
-  grunt.registerTask('default', [ 'concat:basic', 'concat:extras', 'cssmin:main', 'cssmin:blog']);
+  grunt.registerTask('default', [ 'concat:basic', 'concat:extras', 'concat:js', 'cssmin:main', 'cssmin:blog']);
 };
 
 /*
