@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         dest: 'public/assets/css/blog.css',
       },
       js: {
-        src: 'dev/js/*.js',
+        src: ['dev/js/*.js', 'dev/js/vendor/*.js'],
         dest: 'public/js/index.js'
       }
     },
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   //grunt.task.requires()
-  grunt.registerTask('default', [ 'concat:basic', 'concat:extras', 'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog']);
+  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'concat:extras', 'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog']);
 };
 
 /*
