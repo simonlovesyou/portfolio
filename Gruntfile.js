@@ -61,7 +61,7 @@ module.exports = function(grunt) {
           preserveComments: false
         },
         files: {
-          'public/js/index.min.js': 'public/js/index.js'
+          'public/assets/js/index.min.js': 'public/assets/js/index.js'
         }
       }
     }
