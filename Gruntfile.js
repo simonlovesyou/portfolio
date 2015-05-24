@@ -33,12 +33,12 @@ module.exports = function(grunt) {
         separator: ';',
       },
       basic: {
-        src: ['dev/css/bootstrap.css', 'dev/css/main/*.css'],
-        dest: 'public/css/main.css',
+        src: ['dev/css/bootstrap.css', 'dev/css/normalize.css', 'dev/css/main/*.css'],
+        dest: 'public/assets/css/main.css',
       },
       extras: {
-        src: ['dev/css/bootstrap.css', 'dev/css/blog/*.css'],
-        dest: 'public/css/blog.css',
+        src: ['dev/css/bootstrap.css', 'dev/css/normalize.css', 'dev/css/blog/*.css'],
+        dest: 'public/assets/css/blog.css',
       },
       js: {
         src: 'dev/js/*.js',
@@ -47,12 +47,12 @@ module.exports = function(grunt) {
     },
     cssmin: {
       main: {
-        src: 'public/css/main.css',
-        dest: 'public/css/main.min.css'
+        src: 'public/assets/css/main.css',
+        dest: 'public/assets/css/main.min.css'
       },
       blog: {
-        src: 'public/css/blog.css',
-        dest: 'public/css/blog.min.css'
+        src: 'public/assets/css/blog.css',
+        dest: 'public/assets/css/blog.min.css'
       }
     },
     uglify: {
