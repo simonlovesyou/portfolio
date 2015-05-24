@@ -39,7 +39,7 @@ module.exports = function(grunt) {
       extras: {
         src: ['dev/css/bootstrap.css', 'dev/css/blog/*.css'],
         dest: 'public/css/blog.css',
-      },
+      }
     },
     cssmin: {
       main: {
@@ -55,12 +55,12 @@ module.exports = function(grunt) {
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.loadNpmTasks('grunt-concat-css');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  //grunt.registerTask('default', [ 'concat:css', 'cssmin:css', 'concat:js', 'uglify:js' ]);
+  //grunt.task.requires()
+  grunt.registerTask('default', [ 'concat:basic', 'concat:extras', 'cssmin:main', 'cssmin:blog']);
 };
 
 /*
