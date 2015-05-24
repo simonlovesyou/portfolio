@@ -54,6 +54,16 @@ module.exports = function(grunt) {
         src: 'public/css/blog.css',
         dest: 'public/css/blog.min.css'
       }
+    },
+    uglify: {
+      js: {
+        options: {
+          preserveComments: false
+        },
+        files: {
+          'public/js/index.min.js': 'public/js/index.js'
+        }
+      }
     }
   });
 
@@ -64,7 +74,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   //grunt.task.requires()
-  grunt.registerTask('default', [ 'concat:basic', 'concat:extras', 'concat:js', 'cssmin:main', 'cssmin:blog']);
+  grunt.registerTask('default', [ 'concat:basic', 'concat:extras', 'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog']);
 };
 
 /*
