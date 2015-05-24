@@ -3,22 +3,22 @@ var projectApp = angular.module('projectApp', []);
 projectApp.controller('ProjectListCtrl', function ($scope) {
 	$scope.projects = [
 		{ 
-		'src': 'img/logoColormeans.png',
-		'title': 'Colormeans.js',
-		'description': 'I have implemented and improved the k-means algorithm to get a palette of colors from an image. The library is open-source at github. ',
-		'link': 'www.colormeans.com'
+			'src': 'img/logoColormeans.png',
+			'title': 'Colormeans.js',
+			'description': 'I have implemented and improved the k-means algorithm to get a palette of colors from an image. The library is open-source at github. ',
+			'link': 'www.colormeans.com'
 		},
 		{ 
-		'src': 'img/projectPlaceholder.png',
-		'title': 'Project Title 2',
-		'description': 'Project description 2. ',
-		'link': 'www.colormeans.com'
+			'src': 'img/projectPlaceholder.png',
+			'title': 'Project Title 2',
+			'description': 'Project description 2. ',
+			'link': 'www.colormeans.com'
 		},
 		{ 
-		'src': 'img/projectPlaceholder.png',
-		'title': 'Project Title 3',
-		'description': 'Project description 3. ',
-		'link': 'www.colormeans.com'
+			'src': 'img/projectPlaceholder.png',
+			'title': 'Project Title 3',
+			'description': 'Project description 3. ',
+			'link': 'www.colormeans.com'
 		}
 	];
 });
