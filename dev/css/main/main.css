@@ -168,6 +168,7 @@ nav > a{
     width:40%;
     min-width:550px;
     margin-top: 5%;
+    list-style-type:none;
 }
 
 #content > ul > li > div {
