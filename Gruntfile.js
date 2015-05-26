@@ -11,8 +11,8 @@ module.exports = function(grunt) {
           pretty: true
         },
         files: {
-          "debug/layout.html": "dev/jade/layout.jade",
-          "debug/blog.html": "dev/jade/blog.jade"
+          "debug/layout.html": "dev/jade/main/*",
+          "debug/blog.html": "dev/jade/blog/*"
         }
       },
       release: {
@@ -23,8 +23,11 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
-          "public/layout.html": "dev/jade/layout.jade",
-          "public/blog.html": "dev/jade/blog.jade"
+          "public/layout.html": ["dev/jade/main/socialButtons.jade", "dev/jade/main/layout.jade"],
+          "public/blog.html": "dev/jade/blog/*"
+        },
+        compile: {
+          expand: true
         }
       }
     },
