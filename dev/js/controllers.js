@@ -3,19 +3,19 @@ var projectApp = angular.module('projectApp', []);
 projectApp.controller('ProjectListCtrl', function ($scope) {
 	$scope.projects = [
 		{ 
-			'src': 'img/logoColormeans.png',
+			'src': 'assets/img/logoColormeans.png',
 			'title': 'Colormeans.js',
 			'description': 'I have implemented and improved the k-means algorithm to get a palette of colors from an image. The library is open-source at github. ',
 			'link': 'www.colormeans.com'
 		},
 		{ 
-			'src': 'img/projectPlaceholder.png',
+			'src': 'assets/img/projectPlaceholder.png',
 			'title': 'Project Title 2',
 			'description': 'Project description 2. ',
 			'link': 'www.colormeans.com'
 		},
 		{ 
-			'src': 'img/projectPlaceholder.png',
+			'src': 'assets/img/projectPlaceholder.png',
 			'title': 'Project Title 3',
 			'description': 'Project description 3. ',
 			'link': 'www.colormeans.com'
@@ -42,19 +42,19 @@ console.log($http.defaults.headers);
 		[
 			{
 			'color':'#4ECDC4',
-			'src': 'img/Portfolioimage.png'
+			'src': 'assets/img/Portfolioimage.png'
 			},
 			{
 			'color':'#C7F464',
-			'src': 'img/blog/personal.jpg'
+			'src': 'assets/img/blog/personal.jpg'
 			},	
 			{
 			'color':'#FF6B6B',
-			'src': 'img/blog/professional.jpg'
+			'src': 'assets/img/blog/professional.jpg'
 			},
 			{
 			'color':'#C44D58',
-			'src': 'img/blog/projects.jpg'
+			'src': 'assets/img/blog/projects.jpg'
 			},		
 		];
 	$scope.postLists = 
@@ -71,7 +71,7 @@ console.log($http.defaults.headers);
 		$scope.selectedNavIndex = $index;
 		slide($index, $scope.imageList[$index]);
 
-		$http.get('http://localhost:8000/js/json/' + $scope.postLists[$index])
+		$http.get('http://localhost:8000/assets/json/' + $scope.postLists[$index])
 		.then(function(res){
 			if($index > 0) {
 				$scope.postContent = res.data; 
