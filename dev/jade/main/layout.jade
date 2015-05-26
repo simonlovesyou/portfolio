@@ -6,7 +6,7 @@ html(class=".no-js", ng-app="projectApp")
     title
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='assets/css/main.min.css')
+    link(rel='stylesheet', href='assets/css/main.css')
     link(href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,400italic' rel='stylesheet' type='text/css')
 
     //-script(src='javascripts/vendor/modernizr-2.7.1.min.js')
@@ -46,6 +46,8 @@ html(class=".no-js", ng-app="projectApp")
             p#aboutText()
                 | I know what I'm doing because I have a portfolio on the internet. 
                 | I also know how to write placeholder text in the lots. And lots. <br /> Hit me up!
+            #socialButton
+                block social
 
             p#seeMoreText 
                 | See more!
