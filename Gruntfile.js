@@ -96,7 +96,7 @@ module.exports = function(grunt) {
       },
       jade: {
         files: ['**/*.jade'],
-        tasks: ['jade:debug', 'jade:release'],
+        tasks: ['jade'],
         options: {
           spawn: false,
         },
