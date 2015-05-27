@@ -74,7 +74,16 @@ console.log($http.defaults.headers);
 		 	var compiled = $scope.postLists[$index];
 			  $("#content").prepend(compiled);
 		} else {
+			$http.get('http://localhost:8000/assets/json/' + $scope.postLists[$index] +".txt")
+			.then(function(res){
 
+				console.log($scope.postLists[$index]);
+				console.log(res.data[0]);
+				$scope.postClick(res.data[0]);
+				$scope.hideContent = true;
+				
+
+			});
 		}
 	  
 

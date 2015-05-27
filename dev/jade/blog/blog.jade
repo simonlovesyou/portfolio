@@ -24,8 +24,7 @@ html(class=".no-js", ng-app="blogApp")
         #contentWrapper.container
             #content
                 ul(ng-hide="hideContent")
-                    li(ng-repeat="post in postContent track by $index"
-                       ng-click="postClick(post)")
+                    li(ng-repeat="post in postContent track by $index")
                         h2 {{post.header}}
                         h3 {{post.date}}
 
