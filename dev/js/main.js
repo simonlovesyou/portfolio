@@ -18,7 +18,7 @@
         var stickyHeaderRight = $('#stickyHeaderRight');
         var t = 0;
 
-        //"Hack" to fix scroll-event to fire twice.
+        //"Hack" to fix scroll-event to not fire twice.
         $(window).unbind("scroll");
 
 

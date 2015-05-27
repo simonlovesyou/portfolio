@@ -1,7 +1,8 @@
 window.addEventListener("DOMContentLoaded", function() {
 
 	var body = $('header');
-	slide(0, '#4ECDC4');
+	console.log("slice");
+	//slide(0, '#4ECDC4');
 
 });
 
@@ -24,7 +25,7 @@ function slide(index, image) {
 		});
 	$('.sliding').animate(
 		{
-			'mar gin-left': position.left,
+			'margin-left': position.left,
 			'width': liItem.width()
 		}, 'fast');
 

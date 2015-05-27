@@ -1,4 +1,4 @@
-html(class=".no-js", ng-module="blogApp")
+html(class=".no-js", ng-app="blogApp")
     head
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -23,12 +23,14 @@ html(class=".no-js", ng-module="blogApp")
                 
         #contentWrapper.container
             #content
-                ul(ng-hide="hideContent")
+
+                {{article}}
+                //-ul(ng-hide="hideContent")
                     li(ng-repeat="post in postContent track by $index"
                        ng-click="postClick(post)")
                         h2 {{post.header}}
                         h3 {{post.date}}
-                article
+                //-article
                     h1 {{title}}
                     
                     p {{paragraph}}

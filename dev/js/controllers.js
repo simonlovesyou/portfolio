@@ -26,7 +26,7 @@ projectApp.controller('ProjectListCtrl', function ($scope) {
 
 var blogApp = angular.module('blogApp', []);
 
-blogApp.controller('NavContentCtrl', function ($scope, $http) {
+blogApp.controller('NavContentCtrl', function ($scope, $http, $compile) {
 $http.defaults.headers.common["mimeType"] = "application/json";
 
 console.log($http.defaults.headers);
@@ -59,10 +59,10 @@ console.log($http.defaults.headers);
 		];
 	$scope.postLists = 
 		[
-			"about.txt",
-			"personal.txt",
-			"professional.txt",
-			"projects.txt"
+			$compile(angular.element(document.createElement('about')))( $scope ),
+			"personal",
+			"professional",
+			"projects"
 		];
 
 
@@ -70,23 +70,12 @@ console.log($http.defaults.headers);
 
 		$scope.selectedNavIndex = $index;
 		slide($index, $scope.imageList[$index]);
+		if($index === 0) {
+			var compiled = $scope.postLists[$index];
+	  	$("#content").prepend(compiled);
+		}
 
-		$http.get('http://localhost:8000/assets/json/' + $scope.postLists[$index])
-		.then(function(res){
-			if($index > 0) {
-				$scope.postContent = res.data; 
-				$scope.hideContent = false;
-				$scope.title = null;
-				$scope.paragraph = null;
-			} else {
-				console.log($scope.postLists[$index]);
-				console.log(res.data[0]);
-				$scope.postClick(res.data[0]);
-				$scope.hideContent = true;
-			}
-
-		});
-
+	  //angular.element(document.body).append(compiled);
 
 	};
     angular.element(document).ready(function () {
@@ -119,4 +108,4 @@ console.log($http.defaults.headers);
 	};
 
 
-})
+});
