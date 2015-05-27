@@ -23,6 +23,11 @@ html(class=".no-js", ng-app="blogApp")
                 
         #contentWrapper.container
             #content
+                ul(ng-hide="hideContent")
+                    li(ng-repeat="post in postContent track by $index"
+                       ng-click="postClick(post)")
+                        h2 {{post.header}}
+                        h3 {{post.date}}
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js')

@@ -83,19 +83,6 @@ console.log($http.defaults.headers);
         $scope.safeApply(function() {$scope.navClicked(0)});
     });
 
-    $scope.postClick = function(post) {
-    	$scope.title = post.header;
-    	console.log(post);
-    	$scope.paragraph = post.article[0] + '\n';
-    	for(var i = 1; i < post.article.length; i++) {
-
-    		console.log(post.article[i]);
-    		$scope.paragraph += post.article[i] + '\n'
-    		
-    	}
-    	$scope.hideContent = true;
-    	
-    }
     $scope.safeApply = function(fn) {
 		var phase = this.$root.$$phase;
 		if(phase == '$apply' || phase == '$digest') {
