@@ -67,7 +67,30 @@ module.exports = function(grunt) {
           'public/assets/js/index.min.js': 'public/assets/js/index.js'
         }
       }
-    }
+    },
+    watch: {
+      scripts: {
+        files: ['**/*.js'],
+        tasks: ['concat:js', 'uglify:js'],
+        options: {
+          spawn: false,
+        },
+      },
+      jade: {
+        files: ['**/*.jade'],
+        tasks: ['jade:debug', 'jade:release'],
+        options: {
+          spawn: false,
+        },
+      },
+      css: {
+        files: ['**/*.css'],
+        tasks: ['concat:basic', 'concat:extras', 'cssmin:main', 'cssmin:main'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -76,8 +99,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   //grunt.task.requires()
-  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'concat:extras', 'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog']);
+  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'concat:extras', 
+                      'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog',
+                      'watch']);
 };
 
 /*

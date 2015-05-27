@@ -1,7 +1,7 @@
-window.onload = init();
+//$("#wrapper").on( "pagecreate", init());
 
-function init() {
-    $(function(){
+//function init() {
+    $(function() {
         reshape();
 
         // Check the initial Poistion of the Sticky Header
@@ -17,11 +17,17 @@ function init() {
         var stickyHeaderLeft = $('#stickyHeaderLeft');
         var stickyHeaderRight = $('#stickyHeaderRight');
         var t = 0;
-        $(window).scroll( $.throttle(200, function(){
+
+        //"Hack" to fix scroll-event to fire twice.
+        $(window).unbind("scroll");
+
+
+        $(window).scroll( $.throttle(800, function () {
             if($(window).scrollTop() > (stickyHeaderTop-1) ) {
                 if(!toggled) {
-                    console.log("Setting toggle to true" );
+                    
                     toggled = true;
+                    console.log("Setting toggle to true" );
                     console.log(t++);
                     animationSpeed = 1000;
                     $('#logo').css({position: 'fixed', top: '10px'});
@@ -29,8 +35,6 @@ function init() {
                     stickyHeaderLeft.css(stickyHeaderCss);
                     stickyHeaderRight.css(stickyHeaderCss);
                     $('#logowrapper').addClass('filler'); 
-
-                    $('#description').css('margin-top', (iniHeight - $('#description').offset().top) + 15 + "px" )
 
                     //Reset width
                     stickyHeaderLeft.css({width: '0', left: elWidth});
@@ -40,7 +44,11 @@ function init() {
                     stickyHeaderRight.animate({width: elWidth, right: 0}, animationSpeed);
                     
 
-                    
+                    console.log(iniHeight);
+                    console.log($('#description').offset().top);
+                    console.log(iniHeight - $('#description').offset().top);
+                    //$('#description').css('margin-top', (iniHeight - $('#description').offset().top)/16 + "px" )
+                    $('#description').css('margin-top', 64*2-21 +"px" );
                     
 
                 for(var i = 0; i < headerWrappers.length; i++) {
@@ -56,10 +64,6 @@ function init() {
                     
                 }
             }
-
-
-
-
         } else {
             $('#logo').css({position: 'static'});
             if(toggled) {
@@ -84,11 +88,13 @@ $("#seeMore").click(function() {
         'slow');
 });
 
-}
+//}
 
 $(window).resize(function() {
     reshape();
 });
+
+
 
 
 function reshape() {

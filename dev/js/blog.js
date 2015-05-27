@@ -24,7 +24,7 @@ function slide(index, image) {
 		});
 	$('.sliding').animate(
 		{
-			'margin-left': position.left,
+			'mar gin-left': position.left,
 			'width': liItem.width()
 		}, 'fast');
 

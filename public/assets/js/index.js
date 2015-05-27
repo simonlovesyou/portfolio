@@ -24,7 +24,7 @@ function slide(index, image) {
 		});
 	$('.sliding').animate(
 		{
-			'margin-left': position.left,
+			'mar gin-left': position.left,
 			'width': liItem.width()
 		}, 'fast');
 
@@ -34,22 +34,22 @@ function slide(index, image) {
 projectApp.controller('ProjectListCtrl', function ($scope) {
 	$scope.projects = [
 		{ 
-		'src': 'img/logoColormeans.png',
-		'title': 'Colormeans.js',
-		'description': 'I have implemented and improved the k-means algorithm to get a palette of colors from an image. The library is open-source at github. ',
-		'link': 'www.colormeans.com'
+			'src': 'assets/img/logoColormeans.png',
+			'title': 'Colormeans.js',
+			'description': 'I have implemented and improved the k-means algorithm to get a palette of colors from an image. The library is open-source at github. ',
+			'link': 'www.colormeans.com'
 		},
 		{ 
-		'src': 'img/projectPlaceholder.png',
-		'title': 'Project Title 2',
-		'description': 'Project description 2. ',
-		'link': 'www.colormeans.com'
+			'src': 'assets/img/projectPlaceholder.png',
+			'title': 'Project Title 2',
+			'description': 'Project description 2. ',
+			'link': 'www.colormeans.com'
 		},
 		{ 
-		'src': 'img/projectPlaceholder.png',
-		'title': 'Project Title 3',
-		'description': 'Project description 3. ',
-		'link': 'www.colormeans.com'
+			'src': 'assets/img/projectPlaceholder.png',
+			'title': 'Project Title 3',
+			'description': 'Project description 3. ',
+			'link': 'www.colormeans.com'
 		}
 	];
 });
@@ -73,19 +73,19 @@ console.log($http.defaults.headers);
 		[
 			{
 			'color':'#4ECDC4',
-			'src': 'img/Portfolioimage.png'
+			'src': 'assets/img/Portfolioimage.png'
 			},
 			{
 			'color':'#C7F464',
-			'src': 'img/blog/personal.jpg'
+			'src': 'assets/img/blog/personal.jpg'
 			},	
 			{
 			'color':'#FF6B6B',
-			'src': 'img/blog/professional.jpg'
+			'src': 'assets/img/blog/professional.jpg'
 			},
 			{
 			'color':'#C44D58',
-			'src': 'img/blog/projects.jpg'
+			'src': 'assets/img/blog/projects.jpg'
 			},		
 		];
 	$scope.postLists = 
@@ -102,7 +102,7 @@ console.log($http.defaults.headers);
 		$scope.selectedNavIndex = $index;
 		slide($index, $scope.imageList[$index]);
 
-		$http.get('http://localhost:8000/js/json/' + $scope.postLists[$index])
+		$http.get('http://localhost:8000/assets/json/' + $scope.postLists[$index])
 		.then(function(res){
 			if($index > 0) {
 				$scope.postContent = res.data; 
@@ -150,10 +150,10 @@ console.log($http.defaults.headers);
 	};
 
 
-});window.onload = init();
+});//$("#wrapper").on( "pagecreate", init());
 
-function init() {
-    $(function(){
+//function init() {
+    $(function() {
         reshape();
 
         // Check the initial Poistion of the Sticky Header
@@ -169,11 +169,17 @@ function init() {
         var stickyHeaderLeft = $('#stickyHeaderLeft');
         var stickyHeaderRight = $('#stickyHeaderRight');
         var t = 0;
-        $(window).scroll( $.throttle(200, function(){
+
+        //"Hack" to fix scroll-event to fire twice.
+        $(window).unbind("scroll");
+
+
+        $(window).scroll( $.throttle(800, function () {
             if($(window).scrollTop() > (stickyHeaderTop-1) ) {
                 if(!toggled) {
-                    console.log("Setting toggle to true" );
+                    
                     toggled = true;
+                    console.log("Setting toggle to true" );
                     console.log(t++);
                     animationSpeed = 1000;
                     $('#logo').css({position: 'fixed', top: '10px'});
@@ -181,8 +187,6 @@ function init() {
                     stickyHeaderLeft.css(stickyHeaderCss);
                     stickyHeaderRight.css(stickyHeaderCss);
                     $('#logowrapper').addClass('filler'); 
-
-                    $('#description').css('margin-top', (iniHeight - $('#description').offset().top) + 15 + "px" )
 
                     //Reset width
                     stickyHeaderLeft.css({width: '0', left: elWidth});
@@ -192,7 +196,11 @@ function init() {
                     stickyHeaderRight.animate({width: elWidth, right: 0}, animationSpeed);
                     
 
-                    
+                    console.log(iniHeight);
+                    console.log($('#description').offset().top);
+                    console.log(iniHeight - $('#description').offset().top);
+                    //$('#description').css('margin-top', (iniHeight - $('#description').offset().top)/16 + "px" )
+                    $('#description').css('margin-top', 64*2-21 +"px" );
                     
 
                 for(var i = 0; i < headerWrappers.length; i++) {
@@ -208,10 +216,6 @@ function init() {
                     
                 }
             }
-
-
-
-
         } else {
             $('#logo').css({position: 'static'});
             if(toggled) {
@@ -236,11 +240,13 @@ $("#seeMore").click(function() {
         'slow');
 });
 
-}
+//}
 
 $(window).resize(function() {
     reshape();
 });
+
+
 
 
 function reshape() {
@@ -306,3 +312,12 @@ function transferTo(element) {
 }());
 
 // Place any jQuery/helper plugins in here.
+;/*
+ * jQuery throttle / debounce - v1.1 - 3/7/2010
+ * http://benalman.com/projects/jquery-throttle-debounce-plugin/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
+(function(b,c){var $=b.jQuery||b.Cowboy||(b.Cowboy={}),a;$.throttle=a=function(e,f,j,i){var h,d=0;if(typeof f!=="boolean"){i=j;j=f;f=c}function g(){var o=this,m=+new Date()-d,n=arguments;function l(){d=+new Date();j.apply(o,n)}function k(){h=c}if(i&&!h){l()}h&&clearTimeout(h);if(i===c&&m>e){l()}else{if(f!==true){h=setTimeout(i?k:l,i===c?e-m:e)}}}if($.guid){g.guid=j.guid=j.guid||$.guid++}return g};$.debounce=function(d,e,f){return f===c?a(d,e,false):a(d,f,e!==false)}})(this);
