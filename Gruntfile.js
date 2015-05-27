@@ -85,7 +85,7 @@ module.exports = function(grunt) {
       },
       css: {
         files: ['**/*.css'],
-        tasks: ['concat:basic', 'concat:extras', 'cssmin:main', 'cssmin:main'],
+        tasks: ['concat:basic', 'concat:extras', 'cssmin:main', 'cssmin:blog'],
         options: {
           spawn: false,
         },
