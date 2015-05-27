@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         },
         files: {
           "debug/layout.html": "dev/jade/main/*",
-          "debug/blog.html": "dev/jade/blog/*"
+          "debug/blog.html": "dev/jade/blog/*",
         }
       },
       release: {
@@ -24,8 +24,26 @@ module.exports = function(grunt) {
         },
         files: {
           "public/layout.html": ["dev/jade/main/socialButtons.jade", "dev/jade/main/layout.jade"],
-          "public/blog.html": "dev/jade/blog/*"
+          "public/blog.html": "dev/jade/blog/*",
         },
+        compile: {
+          expand: true
+        }
+      },
+      directives: {
+        options: {
+          data: {
+            debug: false
+          },
+          pretty: false
+        },
+        files: [{
+          expand: true,
+          cwd: 'dev/jade/directives/',
+          src: [ '**/*.jade' ],
+          dest: 'public/directives',
+          ext: '.html'
+        }],
         compile: {
           expand: true
         }
@@ -101,7 +119,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   //grunt.task.requires()
-  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'concat:extras', 
+  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'jade:directives', 'concat:extras', 
                       'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog',
                       'watch']);
 };
