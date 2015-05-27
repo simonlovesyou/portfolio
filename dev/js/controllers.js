@@ -70,9 +70,12 @@ console.log($http.defaults.headers);
 
 		$scope.selectedNavIndex = $index;
 		slide($index, $scope.imageList[$index]);
-		
-		var compiled = $scope.postLists[$index];
-	  $("#content").replaceWith(compiled);
+		if($index === 0) {
+		 	var compiled = $scope.postLists[$index];
+			  $("#content").prepend(compiled);
+		} else {
+
+		}
 	  
 
 	  //angular.element(document.body).append(compiled);
