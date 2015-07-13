@@ -11,7 +11,7 @@ module.exports = function(grunt) {
           pretty: true
         },
         files: {
-          "debug/layout.html": "dev/jade/main/*",
+          "debug/layout.html": "dev/jade/main/layout.jade",
           "debug/blog.html": "dev/jade/blog/*",
         }
       },
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
-          "public/layout.html": ["dev/jade/main/socialButtons.jade", "dev/jade/main/layout.jade"],
+          "public/layout.html": ["dev/jade/main/layout.jade"],
           "public/blog.html": "dev/jade/blog/*",
         },
         compile: {
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         dest: 'public/assets/css/blog.css',
       },
       js: {
-        src: ['dev/js/*.js', 'dev/js/vendor/jquery-throttle-debounce-plugin-1.1.min.js'],
+        src: ['dev/js/*.js', 'dev/js/vendor/jquery-throttle-debounce-plugin-1.1.min.js', 'bootstrap.js'],
         dest: 'public/assets/js/index.js'
       }
     },
@@ -119,14 +119,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   //grunt.task.requires()
-  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'jade:directives', 'concat:extras', 
+  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'jade:directives', 'concat:extras',
                       'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog',
                       'watch']);
 };
 
 /*
 # Only concat CSS files
-grunt concat:css 
+grunt concat:css
 
 # Concat CSS and JS files, but don't do anything else
 grunt concat
