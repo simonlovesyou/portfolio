@@ -306,8 +306,12 @@ ul {
     margin-left:-5px !important;
 }
 
+.rainbow + .row > a {
+    line-height: 24px;
+}
+
 .grid-footer > .col-md-6 > .row > .col-md-3 {
-    height:5px;
+    height:3px;
 }
 .grid-footer > .col-md-6 > .row > .col-md-3:nth-child(1) { background-color:#DD3238; }
 .grid-footer > .col-md-6 > .row > .col-md-3:nth-child(2) { background-color:#4A84F0; }
