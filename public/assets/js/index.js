@@ -1,156 +1,12 @@
-window.addEventListener("DOMContentLoaded", function() {
+//$("#wrapper").on( "pagecreate", init());
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	var body = $('header');
-	slide(0, '#4ECDC4');
+ga('create', 'UA-69417124-1', 'auto');
+ga('send', 'pageview');
 
-});
-
-
-
-function slide(index, image) {
-	var firstLi = $('nav ul').children()[index];
-	var liItem = $(firstLi).children();
-	var position = $(liItem).position();
-
-	$('.sliding').css(
-		{
-			'margin-top': position.top + 26,
-			'background-color': image.color
-		});
-	$('#contentImage').css(
-		{
-			border: 'solid 4px ' + image.color,
-			'background-image': 'url(' + image.src + ')' 
-		});
-	$('.sliding').animate(
-		{
-			'mar gin-left': position.left,
-			'width': liItem.width()
-		}, 'fast');
-
-
-};var projectApp = angular.module('projectApp', []);
-
-projectApp.controller('ProjectListCtrl', function ($scope) {
-	$scope.projects = [
-		{ 
-			'src': 'assets/img/logoColormeans.png',
-			'title': 'Colormeans.js',
-			'description': 'I have implemented and improved the k-means algorithm to get a palette of colors from an image. The library is open-source at github. ',
-			'link': 'www.colormeans.com'
-		},
-		{ 
-			'src': 'assets/img/projectPlaceholder.png',
-			'title': 'Project Title 2',
-			'description': 'Project description 2. ',
-			'link': 'www.colormeans.com'
-		},
-		{ 
-			'src': 'assets/img/projectPlaceholder.png',
-			'title': 'Project Title 3',
-			'description': 'Project description 3. ',
-			'link': 'www.colormeans.com'
-		}
-	];
-});
-
-
-var blogApp = angular.module('blogApp', []);
-
-blogApp.controller('NavContentCtrl', function ($scope, $http) {
-$http.defaults.headers.common["mimeType"] = "application/json";
-
-console.log($http.defaults.headers);
-
-	$scope.navList = 
-		[
-		'About',
-		'Personal',
-		'Professional',
-		'Projects'
-		];
-	$scope.imageList = 
-		[
-			{
-			'color':'#4ECDC4',
-			'src': 'assets/img/Portfolioimage.png'
-			},
-			{
-			'color':'#C7F464',
-			'src': 'assets/img/blog/personal.jpg'
-			},	
-			{
-			'color':'#FF6B6B',
-			'src': 'assets/img/blog/professional.jpg'
-			},
-			{
-			'color':'#C44D58',
-			'src': 'assets/img/blog/projects.jpg'
-			},		
-		];
-	$scope.postLists = 
-		[
-			"about.txt",
-			"personal.txt",
-			"professional.txt",
-			"projects.txt"
-		];
-
-
-	$scope.navClicked = function ($index) {
-
-		$scope.selectedNavIndex = $index;
-		slide($index, $scope.imageList[$index]);
-
-		$http.get('http://localhost:8000/assets/json/' + $scope.postLists[$index])
-		.then(function(res){
-			if($index > 0) {
-				$scope.postContent = res.data; 
-				$scope.hideContent = false;
-				$scope.title = null;
-				$scope.paragraph = null;
-			} else {
-				console.log($scope.postLists[$index]);
-				console.log(res.data[0]);
-				$scope.postClick(res.data[0]);
-				$scope.hideContent = true;
-			}
-
-		});
-
-
-	};
-    angular.element(document).ready(function () {
-
-        $scope.safeApply(function() {$scope.navClicked(0)});
-    });
-
-    $scope.postClick = function(post) {
-    	$scope.title = post.header;
-    	console.log(post);
-    	$scope.paragraph = post.article[0] + '\n';
-    	for(var i = 1; i < post.article.length; i++) {
-
-    		console.log(post.article[i]);
-    		$scope.paragraph += post.article[i] + '\n'
-    		
-    	}
-    	$scope.hideContent = true;
-    	
-    }
-    $scope.safeApply = function(fn) {
-		var phase = this.$root.$$phase;
-		if(phase == '$apply' || phase == '$digest') {
-			if(fn && (typeof(fn) === 'function')) {
-				fn();
-			}
-		} else {
-			this.$apply(fn);
-		}
-	};
-
-
-});//$("#wrapper").on( "pagecreate", init());
 
 //function init() {
     $(function() {
@@ -160,98 +16,93 @@ console.log($http.defaults.headers);
         var toggled = false;
         var headerWrappers = document.getElementsByClassName("stickyHeaderWrapper");
         var stickyHeaderCss = 
-        {
-            display: 'block', 
-            position: 'fixed', 
-            top: '10',
-            opacity:1
-        };
+            {
+                display: 'block', 
+                position: 'fixed', 
+                top: '10'
+            };
         var stickyHeaderLeft = $('#stickyHeaderLeft');
         var stickyHeaderRight = $('#stickyHeaderRight');
         var t = 0;
 
         //"Hack" to fix scroll-event to fire twice.
         $(window).unbind("scroll");
+        if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ) {
+            $(window).scroll( $.throttle(400, function () {
+                console.log("StickyHeaderTop: " + stickyHeaderTop);
+                if($(window).scrollTop() > (stickyHeaderTop-1) ) {
+                    if(!toggled) {
+                        
+                        toggled = true;
+                        console.log("Setting toggle to "+toggled );
+                        console.log(t++);
+                        animationSpeed = 500;
+                        $('#logo').css({position: 'fixed', top: '10px'});
+                        $('#stickymarker').css('display', 'block' );
+                        stickyHeaderLeft.css(stickyHeaderCss);
+                        stickyHeaderRight.css(stickyHeaderCss);
+                        $('#logowrapper').addClass('filler'); 
 
+                        //Reset width
+                        stickyHeaderLeft.css({width: '0', left: elWidth});
+                        stickyHeaderRight.css({width: '0', right: elWidth});
+                        //Animate width and position
+                        stickyHeaderLeft.animate({width: elWidth, left: 0}, 0);
+                        stickyHeaderRight.animate({width: elWidth, right: 0}, 0);
+                        
 
-        $(window).scroll( $.throttle(800, function () {
-            if($(window).scrollTop() > (stickyHeaderTop-1) ) {
-                if(!toggled) {
-                    
-                    toggled = true;
-                    console.log("Setting toggle to true" );
-                    console.log(t++);
-                    animationSpeed = 1000;
-                    $('#logo').css({position: 'fixed', top: '10px'});
-                    $('#stickymarker').css('display', 'block' );
-                    stickyHeaderLeft.css(stickyHeaderCss);
-                    stickyHeaderRight.css(stickyHeaderCss);
-                    $('#logowrapper').addClass('filler'); 
+                        console.log("initial Height of description: " + iniHeight);
+                        console.log("Description offset: " + $('#description').offset().top);
+                        console.log("iniheight minus offset: " + (iniHeight - $('#description').offset().top));
+                        //$('#description').css('margin-top', (iniHeight - $('#description').offset().top)/16 + "px" )
+                        $('#description').css('margin-top', iniHeight - $('#description').offset().top +"px" );
+                        
 
-                    //Reset width
-                    stickyHeaderLeft.css({width: '0', left: elWidth});
-                    stickyHeaderRight.css({width: '0', right: elWidth});
-                    //Animate width and position
-                    stickyHeaderLeft.animate({width: elWidth, left: 0}, animationSpeed);
-                    stickyHeaderRight.animate({width: elWidth, right: 0}, animationSpeed);
-                    
-
-                    console.log(iniHeight);
-                    console.log($('#description').offset().top);
-                    console.log(iniHeight - $('#description').offset().top);
-                    //$('#description').css('margin-top', (iniHeight - $('#description').offset().top)/16 + "px" )
-                    $('#description').css('margin-top', 64*2-21 +"px" );
-                    
-
-                for(var i = 0; i < headerWrappers.length; i++) {
-                    $(headerWrappers[i]).css('display', 'block');
-                    //$(headerWrappers[i]).css('width', '0');
-                    if(i==1) {
-                        $(headerWrappers[i]).css({width: '0', right: elWidth});
-                        $(headerWrappers[i]).animate({width: elWidth, right: 0}, animationSpeed);
-                    } else {
-                        $(headerWrappers[i]).css({width: '0', left: elWidth});
-                        $(headerWrappers[i]).animate({width: elWidth, left: 0}, animationSpeed);
+                    for(var i = 0; i < headerWrappers.length; i++) {
+                        $(headerWrappers[i]).css('display', 'block');
+                        //$(headerWrappers[i]).css('width', '0');
+                        if(i==1) {
+                            $(headerWrappers[i]).css({width: '0', right: elWidth});
+                            $(headerWrappers[i]).animate({width: elWidth+1, right: 0}, animationSpeed);
+                        } else {
+                            $(headerWrappers[i]).css({width: '0', left: elWidth});
+                            $(headerWrappers[i]).animate({width: elWidth+1, left: 0}, animationSpeed);
+                        }
+                        
                     }
-                    
                 }
-            }
-        } else {
-            $('#logo').css({position: 'static'});
-            if(toggled) {
-                console.log("Setting toggled to false");
-                toggled=false;
-                stickyHeaderLeft.animate({opacity:0}, 200);
-                stickyHeaderRight.animate({opacity:0}, 200);
-                $('#logowrapper').removeClass('filler');
-                for(var i = 0; i < headerWrappers.length; i++) {
+            } else {
+                $('#logo').css({position: 'static'});
+                if(toggled) {
+                    console.log("Setting toggled to false");
+                    toggled=false;
+                    $('#logowrapper').removeClass('filler');
+                    for(var i = 0; i < headerWrappers.length; i++) {
 
-                    $(headerWrappers[i]).css('display', 'none');
+                        $(headerWrappers[i]).css('display', 'none');
+                    }
+                    $('#description').css('margin-top', '0');
                 }
-                $('#description').css('margin-top', '0');
             }
-        }
-    }));
+        }));
+    }
 });
 $("#seeMore").click(function() {
     console.log("click");
     $('html,body').animate({
-        scrollTop: $("#content").offset().top},
+        scrollTop: $("#content").offset().top-40},
         'slow');
 });
-
-//}
 
 $(window).resize(function() {
     reshape();
 });
 
-
-
-
 function reshape() {
+    console.log("Reshape");
     elWidth = $('body').width()/2;
     elWidth -= 150;  
+    console.log("Elwidth:" + elWidth);
     $('#stickyHeaderLeft').css('width', elWidth);
     $('#stickyHeaderRight').css('width', elWidth);
     headerWrappers = document.getElementsByClassName("stickyHeaderWrapper");
@@ -259,19 +110,30 @@ function reshape() {
         $(headerWrappers[i]).css('width', elWidth);
     }
     //console.log($('#description').offset().top);
-    iniHeight = $('#description').offset().top;
+    setTimeout(function() {
+        iniHeight = $('#description').offset().top;
+    }, 0);
+    
     stickyHeaderTop = $('#logo').offset().top;
+
+    if($(window).width() <= 630) {
+
+    }
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-    var a = document.getElementsByTagName("a");
+    var a = document.querySelectorAll("#headerwrapper > .stickyHeaderWrapper > div > nav > a");
+    console.log(a);
     for(var i = 0; i < a.length; i++) {
         a[i].addEventListener("click", function() {
             attr = this.getAttribute('title');
+            console.log(this);
             if(attr === 'Top') {
                 transferTo('body');
             } else if(attr === 'Work') {
-                transferTo('#content');
+                transferTo('#content', -50);
+            } else if(attr = 'Contact') {
+                transferTo('footer');
             }
             else {
                 transferTo("#" + attr.toLowerCase());
@@ -279,16 +141,41 @@ window.addEventListener("DOMContentLoaded", function() {
 
         });  
     }
+    $('#projectInfo').load('colormeans.html', function() {
+        console.log(this);
+    });
+    console.log($('.grid'));
+
+    $('.grid').masonry({
+      // options
+      itemSelector: '.grid-item',
+      columnWidth: 300
+    });
+
 });
 
-function transferTo(element) {
+function transferTo(element, offset) {
+    console.log("Transfer to:"+element);
+    var offset = offset || 0;
     $('html,body').animate({
-        scrollTop: $(element).offset().top},
+        scrollTop: $(element).offset().top + offset},
         'slow');
 }
 
 
-;// Avoid `console` errors in browsers that lack a console.
+;// This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
+/*require('../../js/transition.js')
+require('../../js/alert.js')
+require('../../js/button.js')
+require('../../js/carousel.js')
+require('../../js/collapse.js')
+require('../../js/dropdown.js')
+require('../../js/modal.js')
+require('../../js/tooltip.js')
+require('../../js/popover.js')
+require('../../js/scrollspy.js')
+require('../../js/tab.js')
+require('../../js/affix.js')*/;// Avoid `console` errors in browsers that lack a console.
 (function() {
     var method;
     var noop = function () {};
