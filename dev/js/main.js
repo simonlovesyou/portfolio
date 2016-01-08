@@ -25,7 +25,7 @@ ga('send', 'pageview');
         var stickyHeaderRight = $('#stickyHeaderRight');
         var t = 0;
 
-        //"Hack" to fix scroll-event to fire twice.
+        //"Hack" to fix scroll-event to not fire twice.
         $(window).unbind("scroll");
         if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ) {
             $(window).scroll( $.throttle(400, function () {

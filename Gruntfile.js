@@ -15,7 +15,11 @@ module.exports = function(grunt) {
         },
         files: {
           "debug/layout.html": "dev/jade/main/layout.jade",
+<<<<<<< HEAD
           "debug/blog.html": "dev/jade/blog/*"
+=======
+          "debug/blog.html": "dev/jade/blog/*",
+>>>>>>> d7017f27a609436f8c176de5d222947b3c6d2d15
         }
       },
       release: {
@@ -26,11 +30,34 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
+<<<<<<< HEAD
           "public/index.html": ["dev/jade/main/layout.jade"]/*,
           "public/blog.html": "dev/jade/blog/*",
           "public/colormeans.html": "dev/jade/main/colormeans.jade",
           "public/dirsortjs.html": "dev/jade/main/dirsortjs.jade"*/
+=======
+          "public/layout.html": ["dev/jade/main/layout.jade"],
+          "public/blog.html": "dev/jade/blog/*",
+>>>>>>> d7017f27a609436f8c176de5d222947b3c6d2d15
         },
+        compile: {
+          expand: true
+        }
+      },
+      directives: {
+        options: {
+          data: {
+            debug: false
+          },
+          pretty: false
+        },
+        files: [{
+          expand: true,
+          cwd: 'dev/jade/directives/',
+          src: ['**/*.jade'],
+          dest: 'public/directives',
+          ext: '.html'
+        }],
         compile: {
           expand: true
         }
@@ -49,7 +76,7 @@ module.exports = function(grunt) {
         dest: 'public/assets/css/blog.css',
       },
       js: {
-        src: ['dev/js/*.js', 'dev/js/vendor/jquery-throttle-debounce-plugin-1.1.min.js'],
+        src: ['dev/js/*.js', 'dev/js/vendor/jquery-throttle-debounce-plugin-1.1.min.js', 'bootstrap.js'],
         dest: 'public/assets/js/index.js'
       }
     },
@@ -106,7 +133,7 @@ module.exports = function(grunt) {
       },
       jade: {
         files: ['**/*.jade'],
-        tasks: ['jade:debug', 'jade:release'],
+        tasks: ['jade'],
         options: {
           spawn: false,
         },
@@ -142,7 +169,7 @@ module.exports = function(grunt) {
 
 /*
 # Only concat CSS files
-grunt concat:css 
+grunt concat:css
 
 # Concat CSS and JS files, but don't do anything else
 grunt concat

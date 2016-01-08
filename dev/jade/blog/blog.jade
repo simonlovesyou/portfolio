@@ -1,4 +1,4 @@
-html(class=".no-js", ng-module="blogApp")
+html(class=".no-js", ng-app="blogApp")
     head
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -24,14 +24,9 @@ html(class=".no-js", ng-module="blogApp")
         #contentWrapper.container
             #content
                 ul(ng-hide="hideContent")
-                    li(ng-repeat="post in postContent track by $index"
-                       ng-click="postClick(post)")
+                    li(ng-repeat="post in postContent track by $index")
                         h2 {{post.header}}
                         h3 {{post.date}}
-                article
-                    h1 {{title}}
-                    
-                    p {{paragraph}}
 
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js')
