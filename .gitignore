@@ -2,4 +2,5 @@ public/
 public/**/*
 config/
 .ftppass
+debug/
 node_modules/
