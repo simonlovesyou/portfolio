@@ -15,11 +15,6 @@ module.exports = function(grunt) {
         },
         files: {
           "debug/layout.html": "dev/jade/main/layout.jade",
-<<<<<<< HEAD
-          "debug/blog.html": "dev/jade/blog/*"
-=======
-          "debug/blog.html": "dev/jade/blog/*",
->>>>>>> d7017f27a609436f8c176de5d222947b3c6d2d15
         }
       },
       release: {
@@ -30,15 +25,7 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
-<<<<<<< HEAD
-          "public/index.html": ["dev/jade/main/layout.jade"]/*,
-          "public/blog.html": "dev/jade/blog/*",
-          "public/colormeans.html": "dev/jade/main/colormeans.jade",
-          "public/dirsortjs.html": "dev/jade/main/dirsortjs.jade"*/
-=======
-          "public/layout.html": ["dev/jade/main/layout.jade"],
-          "public/blog.html": "dev/jade/blog/*",
->>>>>>> d7017f27a609436f8c176de5d222947b3c6d2d15
+          "public/index.html": ["dev/jade/main/layout.jade"]
         },
         compile: {
           expand: true
