@@ -1,5 +1,8 @@
-module.exports = function(grunt) {
+'use strict';
+const fs = require('fs');
 
+module.exports = function(grunt) {
+  let credentials = JSON.parse(fs.readFileSync('config/server.json', 'utf8'));
   // Project configuration.
   grunt.initConfig({
     jade: {
@@ -11,7 +14,7 @@ module.exports = function(grunt) {
           pretty: true
         },
         files: {
-          "debug/layout.html": "dev/jade/main/*",
+          "debug/layout.html": "dev/jade/main/layout.jade",
           "debug/blog.html": "dev/jade/blog/*"
         }
       },
@@ -23,8 +26,10 @@ module.exports = function(grunt) {
           pretty: false
         },
         files: {
-          "public/layout.html": ["dev/jade/main/socialButtons.jade", "dev/jade/main/layout.jade"],
-          "public/blog.html": "dev/jade/blog/*"
+          "public/index.html": ["dev/jade/main/layout.jade"]/*,
+          "public/blog.html": "dev/jade/blog/*",
+          "public/colormeans.html": "dev/jade/main/colormeans.jade",
+          "public/dirsortjs.html": "dev/jade/main/dirsortjs.jade"*/
         },
         compile: {
           expand: true
@@ -61,12 +66,35 @@ module.exports = function(grunt) {
     uglify: {
       js: {
         options: {
-          preserveComments: true
+          preserveComments: false
         },
         files: {
           'public/assets/js/index.min.js': 'public/assets/js/index.js'
         }
       }
+    },
+    'ftp-deploy': {
+      build: {
+        auth: {
+          host: credentials.SERVER,
+          port: credentials.PORT,
+          authKey: 'key1'
+        },
+        src: credentials.SRC,
+        dest: credentials.DEST,
+        exclusions: ['public/**/.DS_Store']
+      }
+    },
+    copy: {
+      images: {
+        files: [
+          {expand: true, cwd:'dev/assets/images/', src: ['*'], dest: 'public/assets/img/', filter: 'isFile'},
+
+        ]
+      }
+    },
+    clean: {
+      public: ["public/"]
     },
     watch: {
       scripts: {
@@ -100,10 +128,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-ftp-deploy')
   //grunt.task.requires()
-  grunt.registerTask('default', ['concat:basic', 'jade:debug', 'jade:release', 'concat:extras', 
-                      'concat:js', 'uglify:js', 'cssmin:main', 'cssmin:blog',
-                      'watch']);
+  grunt.registerTask('default', ['concat:basic', 'jade:release', 
+                                 'concat:js', 'uglify:js', 'cssmin:main', 'watch']);
+  grunt.registerTask('build', ['clean', 'concat:basic', 'jade:release', 
+                               'concat:js', 'uglify:js', 'cssmin:main', 'copy']);
+
+  grunt.registerTask('deploy', ['ftp-deploy']);
 };
 
 /*
